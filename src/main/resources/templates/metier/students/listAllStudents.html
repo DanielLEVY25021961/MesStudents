@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="fr" 
+	xmlns:th="http://www.thymeleaf.org" 
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+			layout:decorate="~{layouts/layout_classique}">
+
+    <head>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- LIEN vers CSS BOOTSTRAP DANS RESSOURCES -->
+<!--         <link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css" -->
+<!--             th:href="@{/css/bootstrap.min.css}" /> -->
+
+        <!-- lien vers CSS PERSONNELLE -->
+		<link rel="stylesheet" type="text/css" href="../../../static/css/application.css" 
+				th:href="@{/css/application.css}" />
+            
+        <!-- lien vers CSS BOOTSTRAP AVEC WEBJARS-->
+         <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" 
+         	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+         
+         <!-- lien vers CSS FONT-AWESOME AVEC WEBJARS-->
+          <link rel="stylesheet" type="text/css" href="/webjars/font-awesome/css/fontawesome.min.css"
+         	th:href="@{/webjars/font-awesome/css/fontawesome.min.css}" />
+        
+        <!-- JAVASCRIPT -->
+		<!-- ATTENTION : TOUJOURS METTRE JQUERY AVANT TOUT SCRIPT --> 
+		<!-- ***************************************************** -->
+		<!-- jQUERY AVEC WEBJARS -->
+		<!-- <script type="text/javascript" src="/webjars/jquery/jquery.min.js" 
+				th:src="@{/webjars/jquery/jquery.min.js}"></script> -->
+
+		<!-- jQUERY DANS RESSOURCES -->
+		<script type="text/javascript" src="../../../static/js/jquery.min.js" 
+				th:src="@{/js/jquery.min.js}"></script>
+		<!-- ***************************************************** -->
+
+		<!-- ***************************************************** -->
+        <!-- POPPER.js AVEC WEBJARS -->
+        <!-- <script type="text/javascript" src="/webjars/popper.js/popper.min.js" 
+     			th:src="@{/webjars/popper.js/popper.min.js}" ></script>  -->
+
+        <!-- POPPER.js DANS RESSOURCES -->
+        <script type="text/javascript" src="../../../static/js/popper.min.js" 
+     			th:src="@{/js/popper.min.js}" ></script> 
+		<!-- ***************************************************** -->
+
+		<!-- ***************************************************** -->
+		<!-- BOOTSTRAP.js AVEC WEBJARS -->
+        <!-- <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js" 
+				th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>  -->
+
+		<!-- BOOTSTRAP.js DANS RESSOURCES -->
+		<script type="text/javascript" src="../../../static/js/bootstrap.min.js" 
+				th:src="@{/js/bootstrap.min.js}"></script> 
+		<!-- ***************************************************** -->
+
+		<!-- MAIN.js (script perso) -->
+		<script type="text/javascript" src="../../../static/js/main.js" 
+				th:src="@{/js/main.js}"></script>
+               
+        <title>students/listAllStudents.html</title>
+        
+    </head>
+    
+    
+    <body>
+    
+    	<!-- DEBUT DIV CONTAINER EXTERNE -->
+        <div class="container">
+               
+              <!-- DEBUT DIV CONTENU DECORANT LE LAYOUT DANS CETTE SECTION -->                 
+              <div layout:fragment="content">
+
+				<!-- DEBUT DIV CONTAINER-FLUID INTERNE -->
+                <div class="container-fluid">
+
+					<!-- DEBUT DIV CONTAINER INTERNE -->
+                    <div class="container">
+
+                        <h1>students/listAllStudents.html</h1>
+                        
+                        <!-- ========================================================== -->
+                        <!--         BOUTON AJOUTER ET FORMULAIRE TAILLE                -->
+                        <!-- ========================================================== -->
+ 						<!-- DEBUT DIV BOUTON AJOUTER STUDENT -->                       
+                        <div class="row justify-content-between mt-3 mb-3 ml-3">
+                        
+                        	<button type="button" class="btn btn-primary col-sm-2" data-toggle="modal" 
+                        		data-target="#saveStudentModal">
+                        
+                        	Ajouter un Student
+                        
+                        	</button>
+                        	
+                        	<form action="#" class="form-inline col-sm-7" 
+                        		th:action="@{/StudentController/versPageListPaginee(numeroPageStudent=${numeroPageCouranteStudent}
+                        		, sizeStudent=${sizeStudent}, motCleStudent=${motCleCourantStudent})}" method="GET" >
+                        		
+								<div class="form-group">
+									
+									<label for="zoneSizeStudent" class="col-form-label mr-3 ml-3">
+										Taille de la page : 
+									</label>
+									 
+									<input
+										type="text" class="mark mr-3 ml-3" 
+										id="zoneSizeStudent" name="sizeStudent" th:value="${sizeCouranteStudent}" 
+										placeholder="taille de la page" />
+									
+								</div>
+																			
+								<button id="buttonSizeStudent" 
+									type="submit" class="btn btn-outline-dark mr-3 ml-3">
+									Enregistrer la taille
+								</button>
+                        		
+                        	</form>
+                        
+                        <!-- FIN DIV BOUTON AJOUTER STUDENT --> 
+                        </div>
+                        
+                        <!-- DEBUT DIV CARD -->
+                        <div class="card m-3">
+                        	
+                        	<div class="card-header text-white bg-primary">Liste des étudiants</div>
+
+							<!-- ========================================================== -->
+                       		<!--                      ZONE DE RECHERCHE                     -->
+                       		<!-- ========================================================== -->                        	                        	
+                        	<!-- DEBUT DIV CARD-BODY RECHERCHE -->
+                        	<div class="card-body" id="rechercheStudent">
+
+                        		<!-- ======================= -->
+                        		<!--    MESSAGES RECHERCHE   -->
+                        		<!-- ======================= -->
+                        		<!-- DEBUT DIV MESSAGE UTILISATEUR SAVE CIRCONSTANCIE -->
+								<div th:if="${messagefindContainsStudent}" 
+									th:classappend="${reponsefindContainsStudent} ? 'alert alert-success' : 'alert alert-danger'">
+		
+									<p th:text="${messagefindContainsStudent}">message utilisateur</p>
+		
+								<!-- FIN DIV MESSAGE UTILISATEUR SAVE CIRCONSTANCIE -->
+								</div>
+
+                        		<!-- ======================= -->
+                        		<!--   FORMULAIRE RECHERCHE  -->
+                        		<!-- ======================= -->                        		
+                        		<!-- DEBUT FORMULAIRE RECHERCHE -->
+                        		<form action="#" class="form-inline"
+                        			th:action="@{/StudentController/versPageListPaginee(numeroPageStudent=${numeroPageCouranteStudent}, sizeStudent=${sizeCouranteStudent}, motCleStudent=${motCleStudent})}" method="GET" >
+                        											
+									<div class="form-group">
+										
+										<label for="zoneRechercheStudent" class="col-form-label mr-3 ml-3">
+											Mot-Clé : 
+										</label>
+										 
+										<input
+											type="text" class="mark mr-3 ml-3" 
+											id="zoneRechercheStudent" name="motCleStudent" th:value="${motCleCourantStudent}" 
+											placeholder="nom recherché" />
+										
+									</div>
+																				
+									<button id="buttonRechercheStudent" 
+										type="submit" class="btn btn-primary mr-3 ml-3">
+										Rechercher
+									</button>
+									
+									<button id="buttonAnnulerRechercheStudent" 
+										type="reset" class="btn btn-outline-dark mr-3 ml-3">
+										Annuler la saisie
+									</button>
+									
+									<a id="buttonResetRechercheStudent" 
+										th:href="@{/StudentController/versPageListPaginee(numeroPageStudent=${numeroPageCouranteStudent}, sizeStudent=${sizeCouranteStudent}, motCleStudent='')}"
+										class="btn btn-secondary mr-3 ml-3">
+										Reset
+									</a>	                        		                       		
+										                        		                       		
+                        		<!-- FIN FORMULAIRE RECHERCHE -->
+                        		</form>
+                        	
+                        	<!-- FIN DIV CARD-BODY RECHERCHE -->	
+                        	</div>
+                        	
+							<!-- ========================================================== -->
+                       		<!--                             LISTE                          -->
+                       		<!-- ========================================================== -->                        	
+                        	<!-- DEBUT DIV CARD-BODY LISTE -->
+                        	<div class="card-body" id="listeStudent">
+                        		
+                        		<!-- ======================= -->
+                        		<!--    MESSAGES LISTE       -->
+                        		<!-- ======================= -->
+                        		<!-- DEBUT DIV MESSAGE UTILISATEUR LIST CIRCONSTANCIE -->
+								<div th:if="${messageListPagineeStudent}" 
+									th:classappend="${reponseServiceListPagineeStudent} ? 'alert alert-success' : 'alert alert-danger'">
+		
+									<p th:text="${messageListPagineeStudent}">message utilisateur</p>
+		
+								<!-- FIN DIV MESSAGE UTILISATEUR SAVE CIRCONSTANCIE -->
+								</div>
+                        		
+                        		<!-- DEBUT DIV MESSAGE UTILISATEUR SAVE CIRCONSTANCIE -->
+								<div th:if="${messageSaveStudent}" 
+									th:classappend="${reponseSaveStudent} ? 'alert alert-success' : 'alert alert-danger'">
+		
+									<p th:text="${messageSaveStudent}">message utilisateur</p>
+		
+								<!-- FIN DIV MESSAGE UTILISATEUR SAVE CIRCONSTANCIE -->
+								</div>
+		
+								<!-- DEBUT DIV MESSAGE UTILISATEUR UPDATE CIRCONSTANCIE -->
+								<div th:if="${messageUpdateStudent}" 
+									th:classappend="${reponseUpdateStudent} ? 'alert alert-success' : 'alert alert-danger'">
+		
+									<p th:text="${messageUpdateStudent}">message utilisateur</p>
+		
+								<!-- FIN DIV MESSAGE UTILISATEUR UPDATE CIRCONSTANCIE -->
+								</div>
+		
+								<!-- DEBUT DIV MESSAGE UTILISATEUR DELETE CIRCONSTANCIE -->
+								<div th:if="${messageDeleteStudent}" 
+									th:classappend="${reponseDeleteStudent} ? 'alert alert-success' : 'alert alert-danger'">
+		
+									<p th:text="${messageDeleteStudent}">message utilisateur</p>
+		
+								<!-- FIN DIV MESSAGE UTILISATEUR DELETE CIRCONSTANCIE -->
+								</div>
+
+                        		
+                        		<!-- ======================= -->
+                        		<!--    LISTE Student        -->
+                        		<!-- ======================= -->                     		
+		                        <!-- DEBUT DIV LISTE DES ETUDIANTS EN BASE -->
+		                        <!-- IF MULTI-CONDITIONS, CONDITIONS MULTIPLES -->
+		                        <div th:if="${listeStudent != null and not listeStudent.isEmpty()}">
+		                        
+		                        	<!-- DEBUT TABLEAU LISTE DES ETUDIANTS EN BASE -->
+			                   		<table class="table table-striped" id="tableListeStudent">
+			                        
+			                        	<thead>
+			                        	
+			                        		<tr>
+			                        			
+			                        			<th scope="col">Id</th>
+			                        			<th scope="col">Name</th>
+			                        			<th scope="col">Department</th>
+			                        			<th scope="col">Updated By</th>
+			                        			<th scope="col">Updated On</th>
+			                        			<th scope="col">EDITION</th>
+			                        			<th scope="col">DELETE</th>
+			                        		
+			                        		</tr>
+			                        	
+			                        	</thead>
+			                        	
+			                        	<tbody>
+			                        	
+			                        		<tr th:each="student : ${listeStudent}">
+			                        		
+			                        			<th scope="row" th:text="${student.id}">Id</th>
+			                        			<td th:text="${student.name}">Name</td>
+			                        			<td th:text="${student.department}">Department</td>
+			                        			<td th:text="${student.updatedBy}">Updated By</td>
+			                        			<!-- ATTENTION : les DOUBLE CROCHETS PERMETTENT DE CONVERTIR LA LocalDateTime
+			                        			 en String formatée à l'aide du CONVERTISSEUR LocalDateTimeFormatter. -->
+												<td th:if="${student}" th:text="${{student.upDatedOn}}">Updated On</td>
+												
+			                        			<td>
+				                        			
+													<a th:href="@{/StudentController/findById(id=${student.id})}" class="btn btn-warning" 
+															 data-toggle="modal" data-target="#updateStudentModal">
+														Editer
+													</a>
+		
+			                        			</td>
+			                        			
+			                        			<td>
+				                        			
+													<a th:href="@{/StudentController/findById(id=${student.id})}" class="btn btn-danger" 
+															 data-toggle="modal" data-target="#deleteStudentModal">
+														Delete
+													</a>
+		
+			                        			</td>
+			                        		
+			                        		</tr>
+			                        	
+			                        	</tbody>
+			                        
+			                        <!-- FIN TABLEAU LISTE DES ETUDIANTS EN BASE -->
+				                    </table>
+		                        	
+		                        	<!-- DEBUT DIV PAGINATION -->
+		                        	<div th:if="${numerosPagesStudent}" >
+		                        	 								
+										<ul class="nav nav-pills">
+										
+			                        		<!-- IF MULTI-CONDITIONS, CONDITIONS MULTIPLES -->
+											<li th:if="${pageStudent != null and pageStudent.hasPrevious()}">
+											
+												<a class="nav-link text-white bg-warning m-3" 
+			   										th:href="@{/StudentController/versPageListPaginee(numeroPageStudent=${pageStudent.number-1}, sizeStudent=${pageStudent.size}, motCleStudent=${motCleCourantStudent})}">
+			   										Previous
+			   									</a>
+			   									
+			 								</li>
+											
+											<li class="nav-item" th:each="numeroPageStudent, status : ${numerosPagesStudent}">
+												 																				
+												<a th:classappend="${pageStudent.number == status.index} ? 'nav-link text-white bg-success m-3' : 'nav-link text-white bg-primary m-3'"											
+													th:text="${status.index} + 1" 
+													th:href="@{/StudentController/versPageListPaginee(numeroPageStudent=${status.index}, sizeStudent=${pageStudent.size}, motCleStudent=${motCleCourantStudent})}">
+													index
+												</a>
+												
+											</li>
+											
+											<!-- IF MULTI-CONDITIONS, CONDITIONS MULTIPLES -->
+											<li th:if="${pageStudent != null and pageStudent.hasNext()}">
+											
+		        								<a class="nav-link text-white bg-secondary m-3"
+		        									th:href="@{/StudentController/versPageListPaginee(numeroPageStudent=${pageStudent.number+1}, sizeStudent=${pageStudent.size}, motCleStudent=${motCleCourantStudent})}">
+		        									Next
+		        								</a>
+		        								
+		    								</li>
+											
+										</ul>
+		                        	
+		                        	<!-- FIN DIV PAGINATION -->
+		                        	</div>
+		                        	
+		                        <!-- FIN DIV LISTE DES ETUDIANTS EN BASE -->
+		                        </div>
+                        		                       		
+                        	<!-- FIN DIV CARD-BODY LISTE -->	
+                        	</div>
+                        
+                        <!-- FIN DIV CARD -->	
+                        </div>
+                                                
+                        
+	
+						<!-- DEBUT DIV MODAL SAVE -->
+						<div class="modal fade" id="saveStudentModal" tabindex="-1"
+							role="dialog" aria-labelledby="saveStudent" aria-hidden="true">
+	
+							<!-- DEBUT FORMULAIRE SAVE -->
+							<form action="#" th:action="@{/StudentController/save(numeroPageStudent=${numeroPageCouranteStudent}, sizeStudent=${sizeCouranteStudent}, motCleStudent=${motCleCourantStudent})}" th:object="${student}" method="POST" >
+	
+								<!-- DEBUT DIV MODAL-DIALOG -->
+								<div class="modal-dialog" role="document">
+	
+									<!-- DEBUT DIV MODAL-CONTENT -->
+									<div class="modal-content">
+	
+										<div class="modal-header">
+											<h5 class="modal-title" id="saveStudent">Ajouter un Student</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+	
+										<div class="modal-body">
+		
+											<div class="form-group">
+												<label for="nameSave" class="col-form-label">
+													Name : 
+												</label> 
+												<input
+													type="text" class="form-control" id="nameSave" name="name" th:field="*{name}" />
+											</div>
+		
+											<div class="form-group">
+												<label for="departmentSave" class="col-form-label">
+													Department : 
+												</label> 
+												<input type="text" class="form-control" id="departmentSave"
+													name="department" th:field="*{department}" />
+											</div>
+		
+											<div class="form-group">
+												<label for="updatedBySave" class="col-form-label">
+													Updated By : 
+												</label> 
+												<input type="text" class="form-control" id="updatedBySave"
+													name="updatedBy" th:field="*{updatedBy}" />
+											</div>
+		
+											<div class="form-group">
+												<label for="upDatedOnSave" class="col-form-label">
+													Updated On : 
+												</label> 
+												<input type="date" class="form-control" id="upDatedOnSave"
+													name="upDatedOn" th:field="*{upDatedOn}" />
+											</div>
+		
+										</div>
+			
+										<div class="modal-footer">
+		
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">
+												Close
+											</button>
+		
+											<button type="submit" class="btn btn-primary">
+												Enregistrer
+											</button>
+		
+										</div>
+									
+									<!-- FIN DIV MODAL-CONTENT -->	
+									</div>
+									
+								<!-- FIN DIV MODAL-DIALOG -->		
+								</div>
+							
+							<!-- FIN FORMULAIRE SAVE -->			
+							</form>
+	
+						<!-- FIN DIV MODAL SAVE -->
+						</div>
+
+	
+						<!-- DEBUT DIV MODAL UPDATE -->
+						<div class="modal fade" id="updateStudentModal" tabindex="-1"
+							role="dialog" aria-labelledby="updateStudent" aria-hidden="true">
+	
+							<!-- DEBUT FORMULAIRE UPDATE -->
+							<form action="#" th:action="@{/StudentController/update(numeroPageStudent=${numeroPageCouranteStudent}, sizeStudent=${sizeCouranteStudent}, motCleStudent=${motCleCourantStudent})}" th:object="${student}" th:method="PUT" >
+	
+								<!-- DEBUT DIV MODAL-DIALOG -->
+								<div class="modal-dialog" role="document">
+	
+									<!-- DEBUT DIV MODAL-CONTENT -->
+									<div class="modal-content">
+	
+										<div class="modal-header">
+											<h5 class="modal-title" id="updateStudent">Modifier un Student</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>										
+	
+										<div class="modal-body">
+										
+											<div class="form-group">
+												<label for="idUpdate" class="col-form-label">
+													ID : 
+												</label> 
+												<input type="text" class="form-control" id="idUpdate" 
+														name="id" th:field="*{id}" readonly="readonly" />
+											</div>
+		
+											<div class="form-group">
+												<label for="nameUpdate" class="col-form-label">
+													Name : 
+												</label> 
+												<input type="text" class="form-control" id="nameUpdate" 
+													name="name" th:field="*{name}" />
+											</div>
+		
+											<div class="form-group">
+												<label for="departmentUpdate" class="col-form-label">
+													Department : 
+												</label> 
+												<input type="text" class="form-control" id="departmentUpdate"
+													name="department" th:field="*{department}" />
+											</div>
+		
+											<div class="form-group">
+												<label for="updatedByUpdate" class="col-form-label">
+													Updated By : 
+												</label> 
+												<input type="text" class="form-control" id="updatedByUpdate"
+													name="updatedBy" th:field="*{updatedBy}" />
+											</div>
+		
+											<div class="form-group">
+												<label for="upDatedOnUpdate" class="col-form-label">
+													Updated On : 
+												</label> 
+												<input type="date" class="form-control" id="upDatedOnUpdate"
+													name="upDatedOn" th:field="*{upDatedOn}" />
+											</div>
+		
+										</div>
+			
+										<div class="modal-footer">
+		
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">
+												Close
+											</button>
+		
+											<button type="submit" class="btn btn-primary">
+												Enregistrer
+											</button>
+		
+										</div>
+									
+									<!-- FIN DIV MODAL-CONTENT -->	
+									</div>
+									
+								<!-- FIN DIV MODAL-DIALOG -->		
+								</div>
+							
+							<!-- FIN FORMULAIRE UPDATE -->			
+							</form>
+	
+						<!-- FIN DIV MODAL UPDATE -->
+						</div>
+
+	
+						<!-- DEBUT DIV MODAL DELETE -->
+						<div class="modal fade" id="deleteStudentModal" tabindex="-1"
+							role="dialog" aria-labelledby="deleteStudent" aria-hidden="true">
+	
+							<!-- DEBUT FORMULAIRE DELETE -->
+							<form action="#" th:action="@{/StudentController/delete(numeroPageStudent=${numeroPageCouranteStudent}, sizeStudent=${sizeCouranteStudent}, motCleStudent=${motCleCourantStudent})}" th:object="${student}" th:method="DELETE" >
+	
+								<!-- DEBUT DIV MODAL-DIALOG -->
+								<div class="modal-dialog" role="document">
+	
+									<!-- DEBUT DIV MODAL-CONTENT -->
+									<div class="modal-content">
+	
+										<div class="modal-header">
+											<h5 class="modal-title" id="updateStudent">Delete un Student</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>										
+	
+										<div class="modal-body">
+										
+											<div class="form-group">
+												<label for="idDelete" class="col-form-label">
+													ID : 
+												</label> 
+												<input type="text" class="form-control" id="idDelete" 
+														name="id" th:field="*{id}" readonly="readonly" />
+											</div>
+		
+											<div class="form-group">
+												<label for="nameDelete" class="col-form-label">
+													Name : 
+												</label> 
+												<input type="text" class="form-control" id="nameDelete" 
+														name="name" th:field="*{name}" readonly="readonly" />
+											</div>
+		
+											<div class="form-group">
+												<label for="departmentDelete" class="col-form-label">
+													Department : 
+												</label> 
+												<input type="text" class="form-control" id="departmentDelete"
+													name="department" th:field="*{department}" readonly="readonly" />
+											</div>
+		
+											<div class="form-group">
+												<label for="updatedByDelete" class="col-form-label">
+													Updated By : 
+												</label> 
+												<input type="text" class="form-control" id="updatedByDelete"
+													name="updatedBy" th:field="*{updatedBy}" readonly="readonly" />
+											</div>
+		
+											<div class="form-group">
+												<label for="upDatedOnDelete" class="col-form-label">
+													Updated On : 
+												</label> 
+												<input type="date" class="form-control" id="upDatedOnDelete"
+													name="upDatedOn" th:field="*{upDatedOn}" readonly="readonly" />
+											</div>
+		
+										</div>
+			
+										<div class="modal-footer">
+		
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">
+												Close
+											</button>
+		
+											<button type="submit" class="btn btn-primary">
+												Détruire
+											</button>
+		
+										</div>
+									
+									<!-- FIN DIV MODAL-CONTENT -->	
+									</div>
+									
+								<!-- FIN DIV MODAL-DIALOG -->		
+								</div>
+							
+							<!-- FIN FORMULAIRE DELETE -->			
+							</form>
+	
+						<!-- FIN DIV MODAL DELETE -->
+						</div>
+
+					<!-- FIN DIV CONTAINER INTERNE -->
+					</div>
+
+				<!-- FIN DIV CONTAINER-FLUID INTERNE -->
+                </div>
+              
+              <!-- FIN DIV CONTENU DECORANT LE LAYOUT DANS CETTE SECTION -->        
+              </div>
+        
+        <!-- FIN DIV CONTAINER EXTERNE -->                   
+        </div>
+		      
+    </body>
+    
+</html>
