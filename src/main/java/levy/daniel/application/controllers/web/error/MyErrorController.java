@@ -131,7 +131,7 @@ public class MyErrorController implements ErrorController {
 	    /* retourne la page d'erreur en fonction du status de l'erreur. */
 	    if (status != null) {
 	    	
-	        Integer statusCode = Integer.valueOf(status.toString());
+	        final Integer statusCode = Integer.valueOf(status.toString());
 	     
 	        if (statusCode == HttpStatus.NOT_FOUND.value()) {
 	            return "error/erreur-404";

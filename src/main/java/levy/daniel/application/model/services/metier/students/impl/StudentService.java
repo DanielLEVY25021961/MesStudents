@@ -48,6 +48,18 @@ public class StudentService implements IStudentService {
 	 * ". ".
 	 */
 	public static final String POINT_ESPACE = ". ";
+
+	/**
+	 * "Le nombre d'enrgistrements par page ".
+	 */
+	public static final String NBRE_ENREGISTREMENTS_PAGE 
+		= "Le nombre d'enrgistrements par page ";
+	
+	/**
+	 * "doit être supérieur ou égal à 1".
+	 */
+	public static final String SUPERIEUR_A_UN 
+		= "doit être supérieur ou égal à 1";
 	
 	/**
 	 * StudentDao injecté par SPRING.
@@ -198,8 +210,8 @@ public class StudentService implements IStudentService {
 		if (pSize < 1) {
 			
 			final String message 
-				= "Le nombre d'enrgistrements par page "
-						+ "doit être supérieur ou égal à 1";
+				= NBRE_ENREGISTREMENTS_PAGE
+						+ SUPERIEUR_A_UN;
 			
 			throw new MauvaisParametreRunTimeException(message);
 		}
@@ -255,8 +267,8 @@ public class StudentService implements IStudentService {
 		if (pSize < 1) {
 			
 			final String message 
-				= "Le nombre d'enrgistrements par page "
-						+ "doit être supérieur ou égal à 1";
+				= NBRE_ENREGISTREMENTS_PAGE
+						+ SUPERIEUR_A_UN;
 			
 			throw new MauvaisParametreRunTimeException(message);
 		}
@@ -560,8 +572,8 @@ public class StudentService implements IStudentService {
 		if (pSize < 1) {
 			
 			final String message 
-				= "Le nombre d'enrgistrements par page "
-						+ "doit être supérieur ou égal à 1";
+				= NBRE_ENREGISTREMENTS_PAGE
+						+ SUPERIEUR_A_UN;
 			
 			throw new MauvaisParametreRunTimeException(message);
 		}
@@ -613,8 +625,8 @@ public class StudentService implements IStudentService {
 		if (pSize < 1) {
 			
 			final String message 
-				= "Le nombre d'enrgistrements par page "
-						+ "doit être supérieur ou égal à 1";
+				= NBRE_ENREGISTREMENTS_PAGE
+						+ SUPERIEUR_A_UN;
 			
 			throw new MauvaisParametreRunTimeException(message);
 		}

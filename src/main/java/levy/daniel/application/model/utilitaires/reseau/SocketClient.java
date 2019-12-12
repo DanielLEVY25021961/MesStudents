@@ -238,7 +238,7 @@ public final class SocketClient {
 			final byte[] bytes = new byte[1024];
 			
 			while ((stream = bufferedInputStream.read(bytes)) != -1) {
-				content += new String(bytes, 0, stream);
+				content += new String(bytes, 0, stream); // NOPMD by dan on 11/12/19 20:02
 			}
 			
 			/* AFFICHE LA REPONSE DU SERVEUR DISTANT DANS UN BROWSER. */
@@ -343,7 +343,11 @@ public final class SocketClient {
 			System.out.println("Adresse socket de l'hôte distant : " + socketProxy.getRemoteSocketAddress());
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			
+			if (LOG.isDebugEnabled()) {
+				LOG.debug(e);
+			}
+			
 		} finally {			
 			socketProxy.close();
 		}
@@ -387,8 +391,8 @@ public final class SocketClient {
 		final int portProtocoleHTTPRequest = 80;
 		
 		String request = "GET wiki/Digital_learning HTTP/1.1" + CARRIAGE_RETURN;
-        request += "Host: fr.wikipedia.org" + CARRIAGE_RETURN;
-        request += CARRIAGE_RETURN;
+        request += "Host: fr.wikipedia.org" + CARRIAGE_RETURN; // NOPMD by dan on 11/12/19 20:02
+        request += CARRIAGE_RETURN; // NOPMD by dan on 11/12/19 20:02
         
         creerSocketDirectEtLireRequete(
         		adresseSiteRemoteRequest

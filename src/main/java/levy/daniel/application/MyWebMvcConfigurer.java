@@ -58,7 +58,6 @@ public class MyWebMvcConfigurer
 	/**
 	 * ApplicationContext injecté par SPRING.
 	 */
-	@Autowired
 	private ApplicationContext applicationContext;
 	
 	/**
@@ -280,9 +279,10 @@ public class MyWebMvcConfigurer
 	/**
 	 * {@inheritDoc}
 	 */
+	@Autowired
 	@Override
 	public void setApplicationContext(
-			ApplicationContext pApplicationContext) throws BeansException {
+			final ApplicationContext pApplicationContext) throws BeansException {
 		this.applicationContext = pApplicationContext;		
 	}
 	

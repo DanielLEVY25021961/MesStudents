@@ -282,7 +282,10 @@ public class MyDataSourceHikari implements IMyDataSource {
 		try {
 	        Class.forName(this.driver);
 	    } catch (ClassNotFoundException e) {
-	        e.printStackTrace();
+	        
+	    	if (LOG.isDebugEnabled()) {
+	    		LOG.debug(e);
+	    	}
 	    }
 		
 		final HikariConfig config = new HikariConfig();

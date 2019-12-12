@@ -239,7 +239,7 @@ public class FileSystemUploadTempService implements IUploadService {
     	 * est null ou vide 
     	 * (pas de sélection de fichier à uploader côté client).*/
     	if (pFileSource.isEmpty()) {
-    		return this.traiterFileSourceEmpty(pFileSource);
+    		return this.traiterFileSourceEmpty();
     	}
     	
 		return this.uploadOneFile(
@@ -269,8 +269,7 @@ public class FileSystemUploadTempService implements IUploadService {
      * 
      * @throws Exception
      */
-    private UploadServiceResponse traiterFileSourceEmpty(
-    		final MultipartFile pFileSource) 
+    private UploadServiceResponse traiterFileSourceEmpty() 
     					throws Exception {
     			
 		final boolean statusService = false;
@@ -312,7 +311,7 @@ public class FileSystemUploadTempService implements IUploadService {
     	 * est null ou vide 
     	 * (pas de sélection de fichier à uploader côté client).*/
     	if (pFileSource.isEmpty()) {
-    		return this.traiterFileSourceEmpty(pFileSource);
+    		return this.traiterFileSourceEmpty();
     	}
 
     	/* n'uploade rien, LOG.fatal et jette une 
@@ -321,7 +320,7 @@ public class FileSystemUploadTempService implements IUploadService {
     	this.traiterMauvaisFileTarget(pFileTarget, METHODE_UPLOAD);
     	
     	/* récupère le nom du fichier multipart source uploadé. */
-    	String filename = pFileSource.getName();
+    	final String filename = pFileSource.getName();
     	
     	Path pathTarget = null;
     	
@@ -635,7 +634,7 @@ public class FileSystemUploadTempService implements IUploadService {
     	}
     	
         /* récupération du nom du fichier source. */
-    	String filename = pFileSource.getName();
+    	final String filename = pFileSource.getName();
     	
 //      filename 
 //  	= org.springframework.util.StringUtils

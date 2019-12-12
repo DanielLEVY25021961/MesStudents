@@ -172,7 +172,6 @@ public class UtilisateurCerbereController
 			return this.utilisateurCerbereService.rechercherRapide(pString);
 		} 
 		
-		System.out.println(" ***** utilisateurCerbereService est NULL ****");
 		return null;
 		
 	} // Fin de rechercherRapide(...)._____________________________________

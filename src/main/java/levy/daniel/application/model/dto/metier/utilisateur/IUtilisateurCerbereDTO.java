@@ -57,17 +57,6 @@ public interface IUtilisateurCerbereDTO
 
 
 	/**
-	 * clone.<br/>
-	 *
-	 * @return IUtilisateurCerbereDTO
-	 * 
-	 * @throws CloneNotSupportedException
-	 */
-	IUtilisateurCerbereDTO clone() throws CloneNotSupportedException;
-
-
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override

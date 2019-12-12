@@ -284,7 +284,7 @@ public class Browser extends JFrame {
 		 * 
 		 * @param pContent : String : contenu du JFXPanel.
 		 */
-		FXRunnable(final String pContent) {
+		FXRunnable(final String pContent) { // NOPMD by dan on 11/12/19 19:51
 			this.content = pContent;
 		} // Fin de CONSTRUCTEUR COMPLET._________________________________
 

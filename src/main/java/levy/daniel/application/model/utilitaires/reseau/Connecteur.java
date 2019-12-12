@@ -51,6 +51,11 @@ public final class Connecteur {
 	public static final String NEWLINE = System.getProperty("line.separator");
 	
 	/**
+	 * "UTF-8".
+	 */
+	public static final String UTF8 = "UTF-8";
+	
+	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
 	 */
@@ -83,7 +88,7 @@ public final class Connecteur {
 			final URL pUrl, final Charset pCharset) throws IOException {
 		
 		expliciterURL(pUrl);
-		System.out.println();
+		System.out.println(); // NOPMD by dan on 11/12/19 19:51
 		
 		final URLConnection urlConnection = pUrl.openConnection();
 		String content = "";
@@ -102,7 +107,7 @@ public final class Connecteur {
 				= new BufferedReader(inputStreamReader);
 			
 			while ((line = bufferedReader.readLine()) != null) {
-				content = content + line + NEWLINE;
+				content = content + line + NEWLINE; // NOPMD by dan on 11/12/19 19:52
 			}
 			
 			// AFFICHE LA PAGE WEB à l'URL pUrl DANS UN BROWSER. 
@@ -173,13 +178,13 @@ public final class Connecteur {
 		//encode les caractères spéciaux  
         //pour qu'ils soient interprétables dans une URL.
         //Nous devons fournir la chaîne à encoder et le type d'encodage, ici UTF-8
-        String recherche = URLEncoder.encode("q", "UTF-8") + "=";
-        recherche = recherche + URLEncoder.encode(pRequete, "UTF-8");
+        String recherche = URLEncoder.encode("q", UTF8) + "=";
+        recherche = recherche + URLEncoder.encode(pRequete, UTF8); // NOPMD by dan on 11/12/19 19:52
         
         //Nous nous connectons, via un objet HTTPUrlConnection
         //à la nouvelle URL, la recherche se faisant en GET, 
         //les paramètres sont dans l'URL
-        System.out.println("URL de recherche : " + pUrl + "?" + recherche);
+        System.out.println("URL de recherche : " + pUrl + "?" + recherche); // NOPMD by dan on 11/12/19 19:52
         
         final URL urlRequete = new URL(pUrl + "?" + recherche);
         
@@ -200,7 +205,7 @@ public final class Connecteur {
     		String line = null;
     		
     		while ((line = bufferedReader.readLine()) != null) {
-    			resultat = resultat + line + NEWLINE;
+    			resultat = resultat + line + NEWLINE; // NOPMD by dan on 11/12/19 19:52
     		}
     		
         } catch (Exception finalE) {
@@ -269,13 +274,13 @@ public final class Connecteur {
 		//encode les caractères spéciaux  
         //pour qu'ils soient interprétables dans une URL.
         //Nous devons fournir la chaîne à encoder et le type d'encodage, ici UTF-8
-        String recherche = URLEncoder.encode("q", "UTF-8") + "=";
-        recherche = recherche + URLEncoder.encode(pRequete, "UTF-8");
+        String recherche = URLEncoder.encode("q", UTF8) + "=";
+        recherche = recherche + URLEncoder.encode(pRequete, UTF8); // NOPMD by dan on 11/12/19 19:52
         
         //Nous nous connectons, via un objet HTTPUrlConnection
         //à la nouvelle URL, la recherche se faisant en GET, 
         //les paramètres sont dans l'URL
-        System.out.println("URL de recherche : " + pUrl + "?" + recherche);
+        System.out.println("URL de recherche : " + pUrl + "?" + recherche); // NOPMD by dan on 11/12/19 19:51
         
         final URL urlRequete = new URL(pUrl + "?" + recherche);
         
@@ -304,7 +309,7 @@ public final class Connecteur {
     		String line = null;
     		
     		while ((line = bufferedReader.readLine()) != null) {
-    			resultat = resultat + line + NEWLINE;
+    			resultat = resultat + line + NEWLINE; // NOPMD by dan on 11/12/19 19:52
     		}
     		
     		return resultat;
@@ -342,11 +347,11 @@ public final class Connecteur {
 	public static void expliciterURL(
 			final URL pUrl) {
 		
-        System.out.println("Authority - pUrl.getAuthority() : " + pUrl.getAuthority());
-        System.out.println("Default port - pUrl.getDefaultPort() : " + pUrl.getDefaultPort());
-        System.out.println("Host - pUrl.getHost() : " + pUrl.getHost());
-        System.out.println("Port - pUrl.getPort() : " + pUrl.getPort());
-        System.out.println("Protocol - pUrl.getProtocol() : " + pUrl.getProtocol());
+        System.out.println("Authority - pUrl.getAuthority() : " + pUrl.getAuthority()); // NOPMD by dan on 11/12/19 19:51
+        System.out.println("Default port - pUrl.getDefaultPort() : " + pUrl.getDefaultPort()); // NOPMD by dan on 11/12/19 19:51
+        System.out.println("Host - pUrl.getHost() : " + pUrl.getHost()); // NOPMD by dan on 11/12/19 19:52
+        System.out.println("Port - pUrl.getPort() : " + pUrl.getPort()); // NOPMD by dan on 11/12/19 19:52
+        System.out.println("Protocol - pUrl.getProtocol() : " + pUrl.getProtocol()); // NOPMD by dan on 11/12/19 19:51
         
 	} // Fin de expliciterURL(...).________________________________________
 	

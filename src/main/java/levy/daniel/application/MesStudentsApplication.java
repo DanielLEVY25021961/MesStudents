@@ -2,13 +2,6 @@ package levy.daniel.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-
-import levy.daniel.application.model.persistence.metier.students.dao.jpaspring.StudentDao;
-import levy.daniel.application.model.persistence.metier.students.entities.jpa.impl.StudentEntityJPA;
 
 /**
  * CLASSE MesStudentsApplication :<br/>
@@ -31,7 +24,7 @@ import levy.daniel.application.model.persistence.metier.students.entities.jpa.im
  *
  */
 @SpringBootApplication
-public class MesStudentsApplication {
+public class MesStudentsApplication { // NOPMD by dan on 11/12/19 20:07
 	
 	
 	
@@ -49,17 +42,9 @@ public class MesStudentsApplication {
 	 *
 	 * @param args : String[].<br/>
 	 */
-	public static void main(String... args) {
+	public static void main(final String... args) {
 		
-		ApplicationContext ctx = SpringApplication.run(MesStudentsApplication.class, args);
-		
-		StudentDao studentDao = ctx.getBean(StudentDao.class);
-		
-		Pageable pageable = PageRequest.of(0, 3);
-				
-		Page<StudentEntityJPA> page = studentDao.findByNameContains("ard", pageable);
-		
-		page.forEach(s -> System.out.println(s));
+		SpringApplication.run(MesStudentsApplication.class, args);
 		
 	} // Fin de main(...)._________________________________________________
 	

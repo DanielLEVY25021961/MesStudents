@@ -59,7 +59,7 @@ public class LocalDateFormatter implements Formatter<LocalDate> {
 	 */
 	@Override
 	public String print(
-			final LocalDate pObject, Locale pLocale) {
+			final LocalDate pObject, final Locale pLocale) {
 		
 		final DateTimeFormatter formatter 
 			= DateTimeFormatter.ofPattern("dd/MM/yyyy").withLocale(pLocale);
@@ -89,7 +89,7 @@ public class LocalDateFormatter implements Formatter<LocalDate> {
 		final DateTimeFormatter formatter 
 			= DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(pLocale);
 		
-		LocalDate date = LocalDate.parse(pText, formatter);
+		final LocalDate date = LocalDate.parse(pText, formatter);
 		
 		return date;
 		

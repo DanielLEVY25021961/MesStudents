@@ -278,7 +278,7 @@ public class FileSystemUploadService implements IUploadService {
     	
        	
     	/* récupère le nom du fichier multipart uploadé. */
-    	String filename = pFileSource.getName();
+    	final String filename = pFileSource.getName();
     	
 //        filename 
 //    	= org.springframework.util.StringUtils
@@ -465,7 +465,7 @@ public class FileSystemUploadService implements IUploadService {
     	
        	
     	/* récupère le nom du fichier multipart uploadé. */
-    	String filename = pFileSource.getName();
+    	final String filename = pFileSource.getName();
     	
 //        filename 
 //    	= org.springframework.util.StringUtils

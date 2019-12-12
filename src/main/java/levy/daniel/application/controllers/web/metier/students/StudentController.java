@@ -42,6 +42,26 @@ import levy.daniel.application.model.services.metier.students.IStudentService;
  * @since 1 déc. 2019
  *
  */
+/**
+ * CLASSE StudentController :<br/>
+ * .<br/>
+ * <br/>
+ *
+ * - Exemple d'utilisation :<br/>
+ *<br/>
+ * 
+ * - Mots-clé :<br/>
+ * <br/>
+ *
+ * - Dépendances :<br/>
+ * <br/>
+ *
+ *
+ * @author dan Lévy
+ * @version 1.0
+ * @since 11 déc. 2019
+ *
+ */
 @Controller(value="StudentController")
 @RequestMapping("/StudentController")
 public class StudentController {
@@ -57,6 +77,26 @@ public class StudentController {
 	 * 3.
 	 */
 	public static final int DEFAULT_SIZE_INT = 3;
+	
+	/**
+	 * "student".
+	 */
+	public static final String STUDENT = "student";
+	
+	/**
+	 * "numeroPageStudent".
+	 */
+	public static final String NUMEROPAGESTUDENT = "numeroPageStudent";
+	
+	/**
+	 * "sizeStudent".
+	 */
+	public static final String SIZESTUDENT = "sizeStudent";
+	
+	/**
+	 * "motCleStudent".
+	 */
+	public static final String MOTCLESTUDENT = "motCleStudent";
 	
 	/**
 	 * IStudentService injecté par SPRING.
@@ -128,10 +168,10 @@ public class StudentController {
 	 */
 	@PostMapping("/save")
 	public String save(
-			@ModelAttribute(name="student") final StudentEntityJPA pStudent
-			, @RequestParam(name="numeroPageStudent", required=false, defaultValue="0") final int pNumeroPage
-			, @RequestParam(name="sizeStudent", required=false, defaultValue=DEFAULT_SIZE) final int pSize
-			, @RequestParam(name="motCleStudent", required=false, defaultValue="") final String pMotCle
+			@ModelAttribute(name=STUDENT) final StudentEntityJPA pStudent
+			, @RequestParam(name=NUMEROPAGESTUDENT, required=false, defaultValue="0") final int pNumeroPage
+			, @RequestParam(name=SIZESTUDENT, required=false, defaultValue=DEFAULT_SIZE) final int pSize
+			, @RequestParam(name=MOTCLESTUDENT, required=false, defaultValue="") final String pMotCle
 				, final RedirectAttributes pRedirectAttributes) 
 						throws Exception {
 		
@@ -189,31 +229,31 @@ public class StudentController {
 						objetStocke.getName(), pSize);
 				
 				pRedirectAttributes.addAttribute(
-						"numeroPageStudent", numeroPageAAtteindre);
+						NUMEROPAGESTUDENT, numeroPageAAtteindre);
 				
 			} catch (Exception e) {
 				
 				pRedirectAttributes.addAttribute(
-						"numeroPageStudent", pNumeroPage);
+						NUMEROPAGESTUDENT, pNumeroPage);
 				
 			}
 						
 		} else {
 			
 			pRedirectAttributes.addAttribute(
-					"numeroPageStudent", pNumeroPage);
+					NUMEROPAGESTUDENT, pNumeroPage);
 			
 		}
 				
 		/* ajoute au RedirectAttributes la taille courante (pSize) 
 		 * dans l'attribut 'sizeStudent'. */
 		pRedirectAttributes.addAttribute(
-				"sizeStudent", pSize);
+				SIZESTUDENT, pSize);
 		
 		/* ajoute au RedirectAttributes le mot-cle courant (pMotCle) 
 		 * dans l'attribut 'motCleStudent'. */
 		pRedirectAttributes.addAttribute(
-				"motCleStudent", pMotCle);
+				MOTCLESTUDENT, pMotCle);
 		
 		return "redirect:/StudentController/versPageListPaginee";
 		
@@ -290,10 +330,10 @@ public class StudentController {
 	 */
 	@RequestMapping(value="/update", method = {RequestMethod.GET, RequestMethod.POST})
 	public String update(
-			@ModelAttribute(name="student") final StudentEntityJPA pStudent
-				, @RequestParam(name="numeroPageStudent", required=false, defaultValue="0") final int pNumeroPage
-				, @RequestParam(name="sizeStudent", required=false, defaultValue=DEFAULT_SIZE) final int pSize
-				, @RequestParam(name="motCleStudent", required=false, defaultValue="") final String pMotCle
+			@ModelAttribute(name=STUDENT) final StudentEntityJPA pStudent
+				, @RequestParam(name=NUMEROPAGESTUDENT, required=false, defaultValue="0") final int pNumeroPage
+				, @RequestParam(name=SIZESTUDENT, required=false, defaultValue=DEFAULT_SIZE) final int pSize
+				, @RequestParam(name=MOTCLESTUDENT, required=false, defaultValue="") final String pMotCle
 				, final RedirectAttributes pRedirectAttributes) 
 						throws Exception {
 		
@@ -342,17 +382,17 @@ public class StudentController {
 		/* ajoute au RedirectAttributes le numéro de page sur lequel 
 		 * revenir dans l'attribut 'numeroPageStudent'. */			
 			pRedirectAttributes.addAttribute(
-					"numeroPageStudent", pNumeroPage);
+					NUMEROPAGESTUDENT, pNumeroPage);
 							
 		/* ajoute au RedirectAttributes la taille courante (pSize) 
 		 * dans l'attribut 'sizeStudent'. */
 		pRedirectAttributes.addAttribute(
-				"sizeStudent", pSize);
+				SIZESTUDENT, pSize);
 		
 		/* ajoute au RedirectAttributes le mot-cle courant (pMotCle) 
 		 * dans l'attribut 'motCleStudent'. */
 		pRedirectAttributes.addAttribute(
-				"motCleStudent", pMotCle);
+				MOTCLESTUDENT, pMotCle);
 		
 		return "redirect:/StudentController/versPageListPaginee";
 
@@ -405,14 +445,14 @@ public class StudentController {
 	 */
 	@RequestMapping(value="/delete", method = {RequestMethod.GET, RequestMethod.POST})
 	public String delete(
-			@ModelAttribute(name="student") final StudentEntityJPA pStudent
-			, @RequestParam(name="numeroPageStudent", required=false, defaultValue="0") final int pNumeroPage
-			, @RequestParam(name="sizeStudent", required=false, defaultValue=DEFAULT_SIZE) final int pSize
-			, @RequestParam(name="motCleStudent", required=false, defaultValue="") final String pMotCle
+			@ModelAttribute(name=STUDENT) final StudentEntityJPA pStudent
+			, @RequestParam(name=NUMEROPAGESTUDENT, required=false, defaultValue="0") final int pNumeroPage
+			, @RequestParam(name=SIZESTUDENT, required=false, defaultValue=DEFAULT_SIZE) final int pSize
+			, @RequestParam(name=MOTCLESTUDENT, required=false, defaultValue="") final String pMotCle
 				, final RedirectAttributes pRedirectAttributes) 
 						throws Exception {
 		
-		StudentEntityJPA objetStocke = pStudent;
+		final StudentEntityJPA objetStocke = pStudent;
 		String message = null;
 		boolean reponseService = false;
 		
@@ -460,24 +500,24 @@ public class StudentController {
 		if (this.studentService.existsNumeroPage(pNumeroPage, pSize)) {
 
 			pRedirectAttributes.addAttribute(
-					"numeroPageStudent", pNumeroPage);
+					NUMEROPAGESTUDENT, pNumeroPage);
 			
 		} else {
 
 			pRedirectAttributes.addAttribute(
-					"numeroPageStudent", (pNumeroPage - 1));
+					NUMEROPAGESTUDENT, pNumeroPage - 1);
 			
 		}
 						
 		/* ajoute au RedirectAttributes la taille courante (pSize) 
 		 * dans l'attribut 'sizeStudent'. */
 		pRedirectAttributes.addAttribute(
-				"sizeStudent", pSize);
+				SIZESTUDENT, pSize);
 		
 		/* ajoute au RedirectAttributes le mot-cle courant (pMotCle) 
 		 * dans l'attribut 'motCleStudent'. */
 		pRedirectAttributes.addAttribute(
-				"motCleStudent", pMotCle);
+				MOTCLESTUDENT, pMotCle);
 
 		return "redirect:/StudentController/versPageListPaginee";
 		
@@ -550,7 +590,7 @@ public class StudentController {
 		/* fournit un Objet Metier vide au Model pour les formulaires 
 		 * de saisie des Objets métier dans l'attributs 'student' (binding). */
 		final StudentEntityJPA student = new StudentEntityJPA();
-		pModel.addAttribute("student", student);
+		pModel.addAttribute(STUDENT, student);
 		
 		try {
 			
@@ -632,9 +672,9 @@ public class StudentController {
 	 */
 	@GetMapping("/versPageListPaginee")
 	public String versPageListPaginee(
-			@RequestParam(name="numeroPageStudent", required=false, defaultValue="0") final int pNumeroPage 
-				, @RequestParam(name="sizeStudent", required=false, defaultValue=DEFAULT_SIZE) final int pSize
-				, @RequestParam(name="motCleStudent", required=false, defaultValue="") final String pMotCle
+			@RequestParam(name=NUMEROPAGESTUDENT, required=false, defaultValue="0") final int pNumeroPage 
+				, @RequestParam(name=SIZESTUDENT, required=false, defaultValue=DEFAULT_SIZE) final int pSize
+				, @RequestParam(name=MOTCLESTUDENT, required=false, defaultValue="") final String pMotCle
 					, final Model pModel) {
 
 		this.rafraichirListePaginee(pNumeroPage, pSize, pMotCle, pModel);
@@ -705,7 +745,7 @@ public class StudentController {
 		/* fournit un Objet Metier vide au Model pour les formulaires 
 		 * de saisie des Objets métier dans l'attribut 'student' (binding). */
 		final StudentEntityJPA student = new StudentEntityJPA();
-		pModel.addAttribute("student", student);
+		pModel.addAttribute(STUDENT, student);
 		
 		/* passe au Model le numéro de page courant (pNumeroPage) 
 		 * dans l'attribut 'numeroPageCouranteStudent'. */

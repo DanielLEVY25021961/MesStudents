@@ -231,20 +231,20 @@ public final class Reseau {
 			
 			while (true) {
 				
-				System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+				System.out.println("-----------------------------------------------------------------------------------------------------------------------------"); // NOPMD by dan on 11/12/19 20:00
 				System.out.println("Saisissez dans la console une adresse IPV4 ou un nom de domaine (ou tapez 'fin' dans la console pour arrêter le programme) : ");
 				System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
 
 				/* lit la saisie utilisateur au clavier. */
 				final String hote = scanner.nextLine();
 
-				if (hote.equalsIgnoreCase("fin")) {
+				if ("fin".equalsIgnoreCase(hote)) {
 					break;
 				}
 
 				final String resultat = lookup(hote);
 				System.out.println("Voici le résultat trouvé : " + resultat);
-				System.out.println();
+				System.out.println(); // NOPMD by dan on 11/12/19 20:00
 			}
 
 			System.out.println("Fin du programme");
@@ -337,7 +337,7 @@ public final class Reseau {
         System.out.println("Authority - pUrl.getAuthority() : " + pUrl.getAuthority());
         System.out.println("Default port - pUrl.getDefaultPort() : " + pUrl.getDefaultPort());
         System.out.println("Host - pUrl.getHost() : " + pUrl.getHost());
-        System.out.println("Port - pUrl.getPort() : " + pUrl.getPort());
+        System.out.println("Port - pUrl.getPort() : " + pUrl.getPort()); // NOPMD by dan on 11/12/19 20:00
         System.out.println("Protocol - pUrl.getProtocol() : " + pUrl.getProtocol());
         
 	} // Fin de expliciterURL(...).________________________________________
@@ -453,7 +453,10 @@ public final class Reseau {
          System.out.println("Adresse de diffusion (Broadcast) =\t"+adrbroadcast.getHostAddress());
         
           } catch (UnknownHostException e) {
-                 e.printStackTrace();
+        	  
+                 if (LOG.isDebugEnabled()) {
+                	 LOG.debug(e);
+                 }
           }
         
     } // Fin de calculerPrefixeAdresseMasque(...)._________________________
@@ -508,7 +511,7 @@ public final class Reseau {
 		String ip = "";
 		
 		for (final byte b : bAddress) {
-			ip += (b & 0xFF) + "."; // L'instruction & 0xFF permet d'avoir la valeur non signée
+			ip += (b & 0xFF) + "."; // L'instruction & 0xFF permet d'avoir la valeur non signée // NOPMD by dan on 11/12/19 20:02
 		}
 
 		System.out.println("Adresse IP depuis tableau de byte : " + ip);

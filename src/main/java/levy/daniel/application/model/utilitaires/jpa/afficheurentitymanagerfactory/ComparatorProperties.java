@@ -61,7 +61,7 @@ public class ComparatorProperties implements Comparator<Entry<String, Object>> {
 			final Entry<String, Object> pO1
 				, final Entry<String, Object> pO2) {
 		
-		if (pO1 == pO2) { 
+		if (pO1 == pO2) {  // NOPMD by dan on 11/12/19 19:48
 			return 0;
 		}
 

@@ -56,6 +56,17 @@ public final class ComparateurFichiers {
 		= "Méthode compareFichiersLigneALigne(File pFile1, Charset pCharset1"
 				+ ", File pFile2, Charset pCharset2";
 	
+	/**
+	 * " . COMPARAISON DE CONTENU IMPOSSIBLE.".
+	 */
+	public static final String COMPARAISON_IMPOSSIBLE 
+		= " . COMPARAISON DE CONTENU IMPOSSIBLE.";
+	
+	/**
+	 * "La ligne ".
+	 */
+	public static final String LIGNE = "La ligne ";
+	
 	//*****************************************************************/
 	//**************************** SEPARATEURS ************************/
 	//*****************************************************************/
@@ -233,7 +244,7 @@ public final class ComparateurFichiers {
 			
 			/* retourne systématiquement true et ne rapporte pas 
 			 * si pFile1 == pFile2 (même instance). */
-			if (pFile1 == pFile2) {
+			if (pFile1 == pFile2) { // NOPMD by dan on 11/12/19 19:39
 				return true;
 			}
 			
@@ -364,7 +375,7 @@ public final class ComparateurFichiers {
 					if (ligne2 == null) {
 						
 						final String message 
-						= "La ligne " 
+						= LIGNE 
 						+ (i + 1) 
 						+ " est nulle dans le 2ème fichier et "
 						+ "pas dans le 1er fichier";
@@ -381,7 +392,7 @@ public final class ComparateurFichiers {
 					if (ligne1.length() != ligne2.length()) {
 											
 						final String message 
-						= "La ligne " 
+						= LIGNE 
 						+ (i + 1) 
 						+ " a une longueur de " 
 						+ ligne1.length() 
@@ -402,7 +413,7 @@ public final class ComparateurFichiers {
 					if (!StringUtils.equals(ligne1, ligne2)) {
 																	
 						final String message 
-						= "La ligne " 
+						= LIGNE 
 						+ (i + 1) 
 						+ " dans le 1er fichier n'est pas égale à la ligne "
 						+ "correspondante dans le deuxième fichier : " 
@@ -422,7 +433,7 @@ public final class ComparateurFichiers {
 					if (ligne2 != null) {
 						
 						final String message 
-						= "La ligne " 
+						= LIGNE 
 						+ (i + 1) 
 						+ " est nulle dans le 1er fichier et "
 						+ "pas dans le 2ème fichier";
@@ -517,7 +528,7 @@ public final class ComparateurFichiers {
 			
 			/* retourne systématiquement true et ne rapporte pas 
 			 * si pFile1 == pFile2 (même instance). */
-			if (pFile1 == pFile2) {
+			if (pFile1 == pFile2) { // NOPMD by dan on 11/12/19 19:39
 				return true;
 			}
 			
@@ -608,7 +619,7 @@ public final class ComparateurFichiers {
 			rapportComparaison 
 				= "le premier fichier passé en paramètre est inexistant : " 
 						+ pFile1.getAbsolutePath()
-						+ " . COMPARAISON DE CONTENU IMPOSSIBLE.";
+						+ COMPARAISON_IMPOSSIBLE;
 			
 			return false;
 		}
@@ -620,7 +631,7 @@ public final class ComparateurFichiers {
 			rapportComparaison 
 				= "le deuxième fichier passé en paramètre est inexistant : "
 						+ pFile2.getAbsolutePath()
-						+ " . COMPARAISON DE CONTENU IMPOSSIBLE.";
+						+ COMPARAISON_IMPOSSIBLE;
 			
 			return false;
 		}
@@ -658,7 +669,7 @@ public final class ComparateurFichiers {
 			rapportComparaison 
 				= "le premier fichier passé en paramètre est un répertoire : " 
 						+ pFile1.getAbsolutePath()
-						+ " . COMPARAISON DE CONTENU IMPOSSIBLE.";
+						+ COMPARAISON_IMPOSSIBLE;
 			
 			return false;
 		}
@@ -670,7 +681,7 @@ public final class ComparateurFichiers {
 			rapportComparaison 
 				= "le deuxième fichier passé en paramètre est un répertoire : "
 						+ pFile2.getAbsolutePath()
-						+ " . COMPARAISON DE CONTENU IMPOSSIBLE.";
+						+ COMPARAISON_IMPOSSIBLE;
 			
 			return false;
 		}

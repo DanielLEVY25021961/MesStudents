@@ -4192,14 +4192,14 @@ public final class GestionnaireFichiers
 
 			// ****************************************************
 			/* LECTURE. */
-			InputStream inputStream = null;  
-			InputStreamReader inputStreamReader = null;  
-			BufferedReader bufferedReader = null;  
+			InputStream inputStream = null;   // NOPMD by dan on 11/12/19 19:47
+			InputStreamReader inputStreamReader = null;   // NOPMD by dan on 11/12/19 19:47
+			BufferedReader bufferedReader = null;   // NOPMD by dan on 11/12/19 19:47
 			
 			/* ECRITURE. */
-			OutputStream outputStream = null;  
-			OutputStreamWriter outputStreamWriter = null;  
-			BufferedWriter bufferedWriter = null;  
+			OutputStream outputStream = null;   // NOPMD by dan on 11/12/19 19:47
+			OutputStreamWriter outputStreamWriter = null;   // NOPMD by dan on 11/12/19 19:47
+			BufferedWriter bufferedWriter = null;   // NOPMD by dan on 11/12/19 19:47
 			
 						
 			/* Parcours de la liste des fichiers à concaténer. */

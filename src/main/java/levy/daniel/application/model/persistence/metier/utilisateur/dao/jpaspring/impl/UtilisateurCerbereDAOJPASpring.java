@@ -1948,8 +1948,6 @@ public class UtilisateurCerbereDAOJPASpring implements IUtilisateurCerbereDAO {
 			return;
 		}
 		
-		System.out.println(this.afficherListeObjetsMetier(stockageList));
-		
 	} // Fin de ecrireStockageDansConsole()._______________________________
 
 	

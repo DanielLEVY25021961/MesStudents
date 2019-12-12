@@ -132,19 +132,33 @@ public class GestionnaireDaoException {
 		}
 		
 		if (pE instanceof EntityExistsException) {
-			System.out.println(pClasse 
-					+ TIRET_AERE 
-					+ pMethode 
-					+ TIRET_AERE 
-					+ "PROBLEME DE PERSISTANCE EntityExistsException : " + pE);
+			
+			final String message 
+			= pClasse 
+			+ TIRET_AERE 
+			+ pMethode 
+			+ TIRET_AERE 
+			+ "PROBLEME DE PERSISTANCE EntityExistsException : ";
+			
+			if (LOG.isDebugEnabled()) {
+				LOG.debug(message, pE);
+			}	
+			
 		}
 		
 		if (pE instanceof IllegalArgumentException) {
-			System.out.println(pClasse 
-					+ TIRET_AERE 
-					+ pMethode 
-					+ TIRET_AERE 
-					+ "PROBLEME DE DEFINITION DES ENTITES IllegalArgumentException : " + pE);
+			
+			final String message 
+				= pClasse 
+				+ TIRET_AERE 
+				+ pMethode 
+				+ TIRET_AERE 
+				+ "PROBLEME DE DEFINITION DES ENTITES IllegalArgumentException : ";
+			
+			if (LOG.isDebugEnabled()) {
+				LOG.debug(message, pE);
+			}	
+			
 		}
 
 	} // Fin de gererException(...)._______________________________________
@@ -207,7 +221,9 @@ public class GestionnaireDaoException {
 		
 		
 		if (pE instanceof EntityExistsException) {
-			System.out.println("PROBLEME DE PERSISTANCE EntityExistsException : " + pE);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("PROBLEME DE PERSISTANCE EntityExistsException : ", pE);
+			}			
 		}
 
 		

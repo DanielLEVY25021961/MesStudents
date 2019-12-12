@@ -246,7 +246,7 @@ public class ConnecteurFTP {
 		final ConnecteurFTP connecteurFTP 
 			= new ConnecteurFTP(user, password, hostFTP, portFTP);
 		
-		final Proxy proxy   
+		final Proxy proxy    // NOPMD by dan on 11/12/19 19:54
 			= connecteurFTP.creerProxy(adresseIpProxy, portProxy, typeProxy);
 		
 //		connecteurFTP.connecterViaProxy(proxy);
@@ -384,7 +384,7 @@ public class ConnecteurFTP {
 
 		final String responseServeurFTP = this.readReponseFTPCanalServeur();
 
-		System.out.println(responseServeurFTP);
+		System.out.println(responseServeurFTP); // NOPMD by dan on 11/12/19 19:54
 
 		if (!responseServeurFTP.startsWith("220")) {
 			throw new IOException(
@@ -397,7 +397,7 @@ public class ConnecteurFTP {
 
 		final String responseUSER = this.readReponseFTPCanalServeur();
 		
-		System.out.println(responseUSER);
+		System.out.println(responseUSER); // NOPMD by dan on 11/12/19 19:54
 		
 		if (!responseUSER.startsWith("331")) {
 			throw new IOException(
@@ -410,7 +410,7 @@ public class ConnecteurFTP {
 
 		final String responsePASS = this.readReponseFTPCanalServeur();
 		
-		System.out.println(responsePASS);
+		System.out.println(responsePASS); // NOPMD by dan on 11/12/19 19:54
 		
 		if (!responsePASS.startsWith("230")) {
 			throw new IOException(
@@ -718,10 +718,10 @@ public class ConnecteurFTP {
 		int stream;
 
 		while ((stream = this.bufferedInputStreamCanalDonnees.read(bytes)) != -1) {
-			response += new String(bytes, 0, stream);
+			response += new String(bytes, 0, stream); // NOPMD by dan on 11/12/19 19:54
 		}
 
-		System.out.println(response);
+		System.out.println(response); // NOPMD by dan on 11/12/19 19:53
 		
 		return response;
 		
@@ -746,7 +746,7 @@ public class ConnecteurFTP {
 		// On lit la réponse
 		final String reponse = this.readReponseFTPCanalServeur();
 		
-		System.out.println(reponse);
+		System.out.println(reponse); // NOPMD by dan on 11/12/19 19:54
 		
 		return reponse;
 		
@@ -774,7 +774,7 @@ public class ConnecteurFTP {
 		// On lit la réponse
 		final String reponse = this.readReponseFTPCanalServeur();
 		
-		System.out.println(reponse);
+		System.out.println(reponse); // NOPMD by dan on 11/12/19 19:54
 		
 		return reponse;
 		
@@ -800,7 +800,7 @@ public class ConnecteurFTP {
 		// On lit la réponse
 		final String response = this.readReponseFTPCanalServeur();
 		
-		System.out.println(response);
+		System.out.println(response); // NOPMD by dan on 11/12/19 19:54
 
 		// Passe le serveur en mode passif pour faire transiter des données.
 		this.enterPassiveMode();
@@ -814,7 +814,7 @@ public class ConnecteurFTP {
 
 		final String reponseCanalDonnees = this.readCanalDonnees();
 		
-		System.out.println(reponseCanalDonnees);
+		System.out.println(reponseCanalDonnees); // NOPMD by dan on 11/12/19 19:54
 		
 		return reponseCanalDonnees;
 		

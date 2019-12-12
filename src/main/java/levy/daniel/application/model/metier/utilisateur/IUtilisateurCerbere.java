@@ -242,17 +242,6 @@ public interface IUtilisateurCerbere
 
 
 	/**
-	 * clone.<br/>
-	 *
-	 * @return IUtilisateurCerbere
-	 * 
-	 * @throws CloneNotSupportedException
-	 */
-	IUtilisateurCerbere clone() throws CloneNotSupportedException;
-
-
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
