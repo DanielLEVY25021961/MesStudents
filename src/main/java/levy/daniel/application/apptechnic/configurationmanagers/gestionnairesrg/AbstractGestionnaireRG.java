@@ -149,7 +149,7 @@ public abstract class AbstractGestionnaireRG implements IGestionnaireRG {
 		final URL[] urlsRessourcesParametrables 
 			= { repertoireRessourcesParametrables.toURI().toURL() };
 	
-		final ClassLoader loaderRessourcesParametrables 
+		final URLClassLoader loaderRessourcesParametrables 
 			= new URLClassLoader(urlsRessourcesParametrables);
 	
 		/* Récupère le ResourceBundle en utilisant le bon ClassLoader. */
@@ -158,6 +158,8 @@ public abstract class AbstractGestionnaireRG implements IGestionnaireRG {
 					this.fournirNomBasePropertiesRG()
 						, pLocale
 							, loaderRessourcesParametrables);
+		
+		loaderRessourcesParametrables.close();
 	
 		return resourceBundle;
 	

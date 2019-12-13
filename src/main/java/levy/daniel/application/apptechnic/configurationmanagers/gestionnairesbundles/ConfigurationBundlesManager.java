@@ -1484,7 +1484,7 @@ public final class ConfigurationBundlesManager
 
 				/* Instancie un ClassLoader pointant 
 				 * sur le répertoire externe. */
-				final ClassLoader loaderRessourcesParametrables 
+				final URLClassLoader loaderRessourcesParametrables 
 					= new URLClassLoader(urlsRessourcesParametrables);
 				
 				/* Récupère le properties (ResourceBundle) externe voulu. */
@@ -1493,7 +1493,9 @@ public final class ConfigurationBundlesManager
 						.getBundle(
 								pNomBaseProperties
 									, locale
-										, loaderRessourcesParametrables);			
+										, loaderRessourcesParametrables);
+				
+				loaderRessourcesParametrables.close();
 				
 			}
 			catch (Exception exc) {
