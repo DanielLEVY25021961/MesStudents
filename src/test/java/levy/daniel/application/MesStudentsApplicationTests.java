@@ -23,7 +23,6 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author dan Lévy
  * @version 1.0
  * @since 30 nov. 2019
- *
  */
 @SpringBootTest
 public class MesStudentsApplicationTests {
